@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import paper from 'paper/dist/paper-full';
 
 //import {ElementRef, ViewChild} from '@angular/core';
 
     // need to define paper outside of class, not sure why
-    declare var paper: any;
+    //    declare var paper;
 
 @Component({
   selector: 'page-home',
@@ -12,10 +13,9 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
     paperObj; //: any;
-//    @ViewChild('myCanvas') myCanvas: ElementRef;
+    myTool;
     path: any;
     drag: any;
-    //    paper: any;
 
   constructor(public navCtrl: NavController) {
   }
@@ -24,37 +24,26 @@ export class HomePage {
     this.paperObj = new paper.PaperScope();
     this.paperObj.install(window);
     this.paperObj.setup('myCanvas');
-  //  this.paperObj.setup(this.myCanvas.nativeElement);
-//      this.paperObj.setup('myCanvas');  
-//    console.log('version:', this.paperObj.version);
-//    console.log('paper obj:', this.paperObj);
-  // Create a Paper.js Path to draw a line into it:
-  //  var path = new this.paper.Path();
-  //  this.path = this.paperObj.Path()
-  // Give the stroke a color
-  //  path.strokeColor = 'black';
-  //  var start = new this.paper.Point(100, 100);
-  // Move to start and draw a line from there
-  //  path.moveTo(start);
-  // Note that the plus operator on Point objects does not work
-  // in JavaScript. Instead, we need to call the add() function:
-  //  path.lineTo(start.add([ 200, -50 ]));
-  // Draw the view now:
-  //  this.paper.view.draw();
   }
 
+  
   mouseDown(event){
-    console.log('mouse down', event);
+    var myTool = new this.paperObj.Tool();
+    myTool.activate();
+    myTool.onMouseDown = function(event) {
+        console.log('x:', event.point.x, 'y:', event.point.y);
+    }     
+    myTool.onMouseDrag = function(event) {
+        console.log('x:', event.point.x, 'y:', event.point.y);
+    }     
     this.drag = true;
-    //    this.path = new this.paperObj.Path();
-    //console.log('new path: ', this.paperObj.Path());
   }
-  mouseMove(){
-    if(this.drag){
-        console.log('mouse move');
-        //        this.path.add(event point);
-    }
-  }
+
+  //  mouseMove(){
+  //    if(this.drag){
+  //        console.log('mouse move');
+  //    }
+  //  }
   mouseUp(){
     console.log('mouse up');
     this.drag = false;
