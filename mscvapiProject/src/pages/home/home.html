@@ -1,3 +1,16 @@
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/paperscript" canvas="myCanvas">
+	// Create a Paper.js Path to draw a line into it:
+	var path = new Path();
+	// Give the stroke a color
+	path.strokeColor = 'black';
+	var start = new Point(100, 100);
+	// Move to start and draw a line from there
+	path.moveTo(start);
+	// Note the plus operator on Point objects.
+	// PaperScript does that for us, and much more!
+	path.lineTo(start + [ 100, -50 ]);
+</script>
 <ion-header>
   <ion-navbar>
     <ion-title>
@@ -11,4 +24,14 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
+  <div>Canvas start</div>
+  <canvas 
+      on-mousedown="mouseDown()"
+      on-mousemove="mouseMove()"
+      on-mouseup="mouseUp()"
+      id="myCanvas"
+      resize
+      style="background-image: url('assets/man.png');">
+  </canvas>
+  <div>Canvas end</div>
 </ion-content>
