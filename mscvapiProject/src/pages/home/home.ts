@@ -34,14 +34,33 @@ export class HomePage {
     var myPath = new this.paperObj.Path()
     myPath.strokeColor = 'black';
     console.log(myPath);
+    
+    // user 'this.paperObj' instead of 'paper'
+    var from = new this.paperObj.Point(20, 20);
+    var to = new this.paperObj.Point(40, 40);
+    var rectPath = new this.paperObj.Path.Rectangle(from, to);
+    rectPath.strokeColor = 'black';
 
     myTool.onMouseDown = function(event) {
-        console.log('x:', event.point.x, 'y:', event.point.y);
+        from.set(event.point.x, event.point.y);
+        //from.set(event.point.x, event.point.y);
+        //to.set(event.point.x, event.point.y);
+        //console.log('x:', event.point.x, 'y:', event.point.y);
+        console.log('from: ', from);
     }     
     myTool.onMouseDrag = function(event) {
-        console.log('x:', event.point.x, 'y:', event.point.y);
+        //to.set(event.point.x, event.point.y); 
+        //console.log('x:', event.point.x, 'y:', event.point.y);
         myPath.add(event.point);
     }     
+    myTool.onMouseUp = function(event) {
+        //rectPath = this.paperObj.Path.Rectangle(from, to);
+        rectPath.set({
+            strokeColor: 'red',
+            strokeWidth: 10
+        });
+        console.log('mouseUp. from: ', from, 'rectPath: ', rectPath);
+    }
     this.drag = true;
   }
 
@@ -50,9 +69,9 @@ export class HomePage {
   //        console.log('mouse move');
   //    }
   //  }
-  mouseUp(){
-    console.log('mouse up');
-    this.drag = false;
-  }
+  //  mouseUp(){
+  //    console.log('mouse up');
+  //    this.drag = false;
+  //  }
   
 }
