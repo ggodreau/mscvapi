@@ -36,17 +36,20 @@ export class HomePage {
     console.log(myPath);
     
     // user 'this.paperObj' instead of 'paper'
-    var from = new this.paperObj.Point(20, 20);
-    var to = new this.paperObj.Point(40, 40);
-    var rectPath = new this.paperObj.Path.Rectangle(from, to);
-    rectPath.strokeColor = 'black';
+    //    var from = new this.paperObj.Point(20, 20);
+    //var to = new this.paperObj.Point(40, 40);
+    var rectPath = new this.paperObj.Path.Rectangle({
+        point: [20, 20],
+        size: [80, 80],
+        strokeColor: 'black'
+    });
 
     myTool.onMouseDown = function(event) {
-        from.set(event.point.x, event.point.y);
+        //from.set(event.point.x, event.point.y);
         //from.set(event.point.x, event.point.y);
         //to.set(event.point.x, event.point.y);
         //console.log('x:', event.point.x, 'y:', event.point.y);
-        console.log('from: ', from);
+        console.log('mouseDown');
     }     
     myTool.onMouseDrag = function(event) {
         //to.set(event.point.x, event.point.y); 
@@ -59,7 +62,7 @@ export class HomePage {
             strokeColor: 'red',
             strokeWidth: 10
         });
-        console.log('mouseUp. from: ', from, 'rectPath: ', rectPath);
+        console.log('mouseUp', 'rectPath: ', rectPath);
     }
     this.drag = true;
   }
