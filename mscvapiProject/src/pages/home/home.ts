@@ -14,6 +14,7 @@ export class HomePage {
     paperObj; //: any;
 //    @ViewChild('myCanvas') myCanvas: ElementRef;
     path: any;
+    drag: any;
     //    paper: any;
 
   constructor(public navCtrl: NavController) {
@@ -42,14 +43,21 @@ export class HomePage {
   //  this.paper.view.draw();
   }
 
-  mouseDown(){
-    console.log('mouse down');
+  mouseDown(event){
+    console.log('mouse down', event);
+    this.drag = true;
+    //    this.path = new this.paperObj.Path();
+    //console.log('new path: ', this.paperObj.Path());
   }
   mouseMove(){
-    console.log('mouse move');
+    if(this.drag){
+        console.log('mouse move');
+        //        this.path.add(event point);
+    }
   }
   mouseUp(){
     console.log('mouse up');
+    this.drag = false;
   }
   
 }

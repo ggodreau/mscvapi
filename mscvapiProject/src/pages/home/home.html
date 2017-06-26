@@ -26,7 +26,7 @@
   </p>
   <div>Canvas start</div>
   <canvas 
-      on-mousedown="mouseDown()"
+      on-mousedown="mouseDown(event)"
       on-mousemove="mouseMove()"
       on-mouseup="mouseUp()"
       id="myCanvas"
@@ -34,4 +34,5 @@
       style="background-image: url('assets/man.png');">
   </canvas>
   <div>Canvas end</div>
+  <button ng-click="mouseUp()">click me</button>
 </ion-content>
