@@ -30,11 +30,17 @@ export class HomePage {
   mouseDown(event){
     var myTool = new this.paperObj.Tool();
     myTool.activate();
+
+    var myPath = new this.paperObj.Path()
+    myPath.strokeColor = 'black';
+    console.log(myPath);
+
     myTool.onMouseDown = function(event) {
         console.log('x:', event.point.x, 'y:', event.point.y);
     }     
     myTool.onMouseDrag = function(event) {
         console.log('x:', event.point.x, 'y:', event.point.y);
+        myPath.add(event.point);
     }     
     this.drag = true;
   }
