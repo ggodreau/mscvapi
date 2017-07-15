@@ -2,19 +2,11 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import paper from 'paper/dist/paper-full';
 
-//import {ElementRef, ViewChild} from '@angular/core';
-
-    // need to define paper outside of class, not sure why
-    //    declare var paper;
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-//paperObj; //: any;
-  //  myTool;
-  //path: any;
 
   constructor(public navCtrl: NavController) {
   }
@@ -31,19 +23,22 @@ export class HomePage {
     var myTool = new paperObj.Tool();
     myTool.activate();
 
-    //mouseDown(event){
-    //  var myPath = new this.paperObj.Path()
-    //  myPath.strokeColor = 'black';
-    //  console.log(myPath);
-      
+    var rectPath;
+    var from = new paperObj.Point(paperObj.point);
+    var to = new paperObj.Point(paperObj.point);
+
     myTool.onMouseDown = function(event) {
-          console.log('paperObj in nested:', paperObj);
+        from = event.point;
+        to = event.point;
+        rectPath = new paperObj.Path.Rectangle(from, to);
+        rectPath.strokeColor = 'black';
+        console.log('rectPathClick:', rectPath);
     }     
-      //this.myTool.onMouseDrag = function(event) {
-      //    var x = event.point.x;
-      //    var y = event.point.y;
-      //    console.log('x,y:', x, y);
-      //}
-     //}       
+    
+    myTool.onMouseDrag = function(event) {
+        rectPath.removeSegments();
+        rectPath = paperObj.Path.Rectangle(from, event.point);
+        rectPath.strokeColor = 'blue';
+    }       
   }
 }
